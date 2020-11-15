@@ -48,14 +48,38 @@ BASE_URL_MF = "https://space-facts.com/mars/"
 r_mf = requests.get(BASE_URL_MF)
 # print(r_mf.status_code)
 
-soup_mf = BeautifulSoup(r_mf.text, "lxml")
+soup_mf = BeautifulSoup(r_mf.text, "html.parser")
 # print(soup_mf)
 # table = soup_mf.find("section", class_ = "sidebar widget-area clearfix").find("tablepress tablepress-id-p-mars")
 # table = soup_mf.find("div", class_ = "textwidget")
 table = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
 # print(table.prettify())
 
-# This doesn't work
-df_mf = pd.read_html(table)
-print(df_mf)
+## This doesn't work
+# df_mf = pd.read_html(table)
+# print(df_mf)
 
+
+
+# Mars Hemispheres
+BASE_URL_MH = "https://astrogeology.usgs.gov/search/results"
+BASE_PARAMS_NH = {
+    "q": "hemisphere+enhanced",
+    "k1": "target",
+    "v1": "Mars",
+}
+
+r_mh = requests.get(BASE_URL_MH, params = BASE_URL_MH)
+# print(r_mh.status_code)
+
+soup_mh = BeautifulSoup(r_mh.text, "html.parser")
+# print(soup_mh.prettify())
+
+# images = soup_mh.find_all("div", class_ = "result-list")
+# images = soup_mh.find_all("div", class_ = "item")
+# image = images[0]
+# image = images.find("div", class_ = "item").find("img")["src"]
+
+images = soup_mh.find("div", class_ = "item")
+print(images.prettify())
+# print(image.prettify())
