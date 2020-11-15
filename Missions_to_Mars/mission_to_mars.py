@@ -1,9 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
-URL = "https://mars.nasa.gov/news/"
 
-BASE_PARAMS = {
+# NASA Mars News
+
+URL_NMN = "https://mars.nasa.gov/news/"
+
+BASE_PARAMS_NMN = {
     "page": 0,
     "per_page": 40,
     "order": "publish_date+desc%2Ccreated_at+desc",
@@ -12,19 +18,44 @@ BASE_PARAMS = {
     "blank_scope": "Latest",
 }
 
-# r = requests.get(URL)
-r = requests.get(URL, params = BASE_PARAMS)
+# r_nmn = requests.get(URL)
+r_nmn = requests.get(URL_NMN, params = BASE_PARAMS_NMN)
 
-# print(r.status_code)
-# print(r.text)
+# print(r_nmn.status_code)
+# print(r_nmn.text)
 
-soup = BeautifulSoup(r.text, "html.parser")
-# print(soup.prettify())
-# print(soup.find(class_="content_title").text.strip())
-title = soup.find(class_="content_title").text.strip()
-print(title)
-# print(soup.find(class_="content_title").find_all("p").text.strip())
-# print(soup.find(class_="article_teaser_body"))
-text = soup.find("p").text
-print(text)
+soup_nmn = BeautifulSoup(r_nmn.text, "html.parser")
+# print(soup_nmn.prettify())
+# print(soup_nmn.find(class_="content_title").text.strip())
+titles = soup_nmn.find_all(class_="content_title")
+title = titles[0].text.strip()
+# print(title)
+# print(soup_nmn.find(class_="content_title").find_all("p").text.strip())
+# print(soup_nmn.find(class_="article_teaser_body"))
+texts = soup_nmn.find_all("p")
+text = texts[0].text
+# print(text)
+
+
+
+# JPL Mars Space Images - Featured Image
+## I don't know what splinter is??
+
+
+# Mars Facts
+BASE_URL_MF = "https://space-facts.com/mars/"
+
+r_mf = requests.get(BASE_URL_MF)
+# print(r_mf.status_code)
+
+soup_mf = BeautifulSoup(r_mf.text, "lxml")
+# print(soup_mf)
+# table = soup_mf.find("section", class_ = "sidebar widget-area clearfix").find("tablepress tablepress-id-p-mars")
+# table = soup_mf.find("div", class_ = "textwidget")
+table = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
+# print(table.prettify())
+
+# This doesn't work
+df_mf = pd.read_html(table)
+print(df_mf)
 
