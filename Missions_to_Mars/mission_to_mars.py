@@ -7,12 +7,15 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Selenium
 def get_html(url, wait):
-        driver = webdriver.Firefox()
-        driver.get(url)
-        driver.implicitly_wait(wait)
-        html = driver.page_source
-        driver.close
-        return html
+    # fireFoxOptions = webdriver.FirefoxOptions()
+    # fireFoxOptions.set_headless()
+    # driver = webdriver.Firefox(firefox_options = fireFoxOptions)
+    driver = webdriver.Firefox()
+    driver.get(url)
+    driver.implicitly_wait(wait)
+    html = driver.page_source
+    driver.close()
+    return html
 
 
 # NASA Mars News
@@ -43,18 +46,27 @@ soup_nmn = BeautifulSoup(html_nmn, "html.parser")
 # print(soup_nmn.find(class_="content_title").text.strip())
 titles = soup_nmn.find_all("div", class_="content_title")
 # titles = soup_nmn.find_all(target="_self")
-title = titles[1].text.strip()
-print(title)
+news_title = titles[1].text.strip()
+# print(title)
 # print(soup_nmn.find(class_="content_title").find_all("p").text.strip())
 # print(soup_nmn.find(class_="article_teaser_body"))
-texts = soup_nmn.find_all("p")
-text = texts[0].text
+texts = soup_nmn.find_all("div", class_="article_teaser_body")
+news_p = texts[0].text
 # print(text)
 
 
 
 # JPL Mars Space Images - Featured Image
-## I don't know what splinter is??
+
+url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+html_jpl = get_html(url, wait = 1)
+soup_jpl = BeautifulSoup(html_jpl, "html.parser")
+
+image = soup_jpl.find("div", class_ = "carousel_items")["data-link"]
+print(image)
+
+
+
 
 
 # Mars Facts
