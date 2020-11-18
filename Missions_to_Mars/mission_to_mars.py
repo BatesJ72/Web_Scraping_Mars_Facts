@@ -45,42 +45,50 @@ def get_html_nmn(url_nmn, wait):
 
 # JPL Mars Space Images - Featured Image
 
-def get_html_jpl(url_jpl, wait):
-    driver = webdriver.Firefox()
-    driver.get(url)
-    driver.implicitly_wait(wait)
-    html = driver.page_source
-    driver.close()
-    return html_jpl
+# def get_html_jpl(url_jpl, wait):
+#     driver = webdriver.Firefox()
+#     driver.get(url)
+#     driver.implicitly_wait(wait)
+#     html = driver.page_source
+#     driver.close()
+#     return html_jpl
 
-url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-html_jpl = get_html(url_jpl, wait = 1)
-soup_jpl = BeautifulSoup(html_jpl, "html.parser")
+# url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+# html_jpl = get_html(url_jpl, wait = 1)
+# soup_jpl = BeautifulSoup(html_jpl, "html.parser")
 
-# image = soup_jpl.find("div", class_ = "image_and_description_container").find("div").find("img")["src"]
-image = soup_jpl.find("div", class_ = "img").find("img")["src"]
-print(image)
+# image = soup_jpl.find("div", class_ = "img").find("img")["src"]
+# print(image)
 
 
 
 
 
 # # Mars Facts
-# BASE_URL_MF = "https://space-facts.com/mars/"
 
-# r_mf = requests.get(BASE_URL_MF)
-# # print(r_mf.status_code)
+def get_html_mf(url_mf, wait):
+    driver = webdriver.Firefox()
+    driver.get(url)
+    driver.implicitly_wait(wait)
+    html_mf = driver.page_source
+    driver.close()
+    return html_mf
 
-# soup_mf = BeautifulSoup(r_mf.text, "html.parser")
-# # print(soup_mf)
-# # table = soup_mf.find("section", class_ = "sidebar widget-area clearfix").find("tablepress tablepress-id-p-mars")
-# # table = soup_mf.find("div", class_ = "textwidget")
-# table = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
-# # print(table.prettify())
+url_mf = "https://space-facts.com/mars/"
+html_mf = get_html(url_mf, wait = 1)
+soup_mf = BeautifulSoup(html_mf, "html.parser")
+# print(soup_mf.prettify())
 
-# ## This doesn't work
-# # df_mf = pd.read_html(table)
-# # print(df_mf)
+table_mf = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
+# print(table_mf.prettify())
+
+## This doesn't work
+# data_mf = pd.read_html(table_mf)
+# df_mf = pd.DataFrame(data_mf)
+# t_mf.to_html("mars_facts_table.html")
+
+with open('mars_facts_table.html', 'w+', encoding = 'utf-8') as f:
+    f.write(str(table_mf))
 
 
 
