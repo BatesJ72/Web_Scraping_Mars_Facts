@@ -6,31 +6,31 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # Selenium
-def get_html(url, wait):
-    # fireFoxOptions = webdriver.FirefoxOptions()
-    # fireFoxOptions.set_headless()
-    # driver = webdriver.Firefox(firefox_options = fireFoxOptions)
-    driver = webdriver.Firefox()
-    driver.get(url)
-    driver.implicitly_wait(wait)
-    html = driver.page_source
-    driver.close()
-    return html
+# def get_html(url, wait):
+#     # fireFoxOptions = webdriver.FirefoxOptions()
+#     # fireFoxOptions.set_headless()
+#     # driver = webdriver.Firefox(firefox_options = fireFoxOptions)
+#     driver = webdriver.Firefox()
+#     driver.get(url)
+#     driver.implicitly_wait(wait)
+#     html = driver.page_source
+#     driver.close()
+#     return html
 
 
 # NASA Mars News
 
-def get_html_nmn(url_nmn, wait):
-    driver = webdriver.Firefox()
-    driver.get(url)
-    driver.implicitly_wait(wait)
-    html = driver.page_source
-    driver.close()
-    return html_nmn
+# def get_html_nmn(url_nmn, wait):
+#     driver = webdriver.Firefox()
+#     driver.get(url_nmn)
+#     driver.implicitly_wait(wait)
+#     html_nmn = driver.page_source
+#     driver.close()
+#     return html_nmn
 
 
 # url_nmn = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
-# html_nmn = get_html(url_nmn, wait = 1)
+# html_nmn = get_html_nmn(url_nmn, wait = 1)
 # soup_nmn = BeautifulSoup(html_nmn, "html.parser")
 
 # titles = soup_nmn.find_all("div", class_="content_title")
@@ -47,14 +47,14 @@ def get_html_nmn(url_nmn, wait):
 
 # def get_html_jpl(url_jpl, wait):
 #     driver = webdriver.Firefox()
-#     driver.get(url)
+#     driver.get(url_jpl)
 #     driver.implicitly_wait(wait)
-#     html = driver.page_source
+#     html_jpl = driver.page_source
 #     driver.close()
 #     return html_jpl
 
 # url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-# html_jpl = get_html(url_jpl, wait = 1)
+# html_jpl = get_html_jpl(url_jpl, wait = 1)
 # soup_jpl = BeautifulSoup(html_jpl, "html.parser")
 
 # image = soup_jpl.find("div", class_ = "img").find("img")["src"]
@@ -66,52 +66,47 @@ def get_html_nmn(url_nmn, wait):
 
 # # Mars Facts
 
-def get_html_mf(url_mf, wait):
+# def get_html_mf(url_mf, wait):
+#     driver = webdriver.Firefox()
+#     driver.get(url_mf)
+#     driver.implicitly_wait(wait)
+#     html_mf = driver.page_source
+#     driver.close()
+#     return html_mf
+
+# url_mf = "https://space-facts.com/mars/"
+# html_mf = get_html_mf(url_mf, wait = 1)
+# soup_mf = BeautifulSoup(html_mf, "html.parser")
+# # print(soup_mf.prettify())
+
+# table_mf = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
+# # print(table_mf.prettify())
+
+# with open('mars_facts_table.html', 'w+', encoding = 'utf-8') as f:
+#     f.write(str(table_mf))
+
+
+
+# Mars Hemispheres
+
+def get_html_mh(url_mh, wait):
     driver = webdriver.Firefox()
-    driver.get(url)
+    driver.get(url_mh)
     driver.implicitly_wait(wait)
-    html_mf = driver.page_source
+    html_mh = driver.page_source
     driver.close()
-    return html_mf
+    return html_mh
 
-url_mf = "https://space-facts.com/mars/"
-html_mf = get_html(url_mf, wait = 1)
-soup_mf = BeautifulSoup(html_mf, "html.parser")
-# print(soup_mf.prettify())
+url_mh = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+html_mh = get_html_mh(url_mh, wait = 1)
+soup_mh = BeautifulSoup(html_mh, "html.parser")
+print(soup_mh.prettify())
 
-table_mf = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
-# print(table_mf.prettify())
-
-## This doesn't work
-# data_mf = pd.read_html(table_mf)
-# df_mf = pd.DataFrame(data_mf)
-# t_mf.to_html("mars_facts_table.html")
-
-with open('mars_facts_table.html', 'w+', encoding = 'utf-8') as f:
-    f.write(str(table_mf))
-
-
-
-# # Mars Hemispheres
-# BASE_URL_MH = "https://astrogeology.usgs.gov/search/results"
-# BASE_PARAMS_NH = {
-#     "q": "hemisphere+enhanced",
-#     "k1": "target",
-#     "v1": "Mars",
-# }
-
-# r_mh = requests.get(BASE_URL_MH, params = BASE_URL_MH)
-# # print(r_mh.status_code)
-# # print(r_mh.text)
-
-# soup_mh = BeautifulSoup(r_mh.text, "html.parser")
-# # print(soup_mh.prettify())
-
-# # images = soup_mh.find_all("div", class_ = "result-list")
-# # images = soup_mh.find_all("div", class_ = "item")
-# # image = images[0]
-# # image = images.find("div", class_ = "item").find("img")["src"]
+# images = soup_mh.find_all("div", class_ = "result-list")
+# images = soup_mh.find_all("div", class_ = "item")
+# image = images[0]
+# image = images.find("div", class_ = "item").find("img")["src"]
 
 # images = soup_mh.find("div", class_ = "item")
-# # print(images.prettify())
-# # print(image.prettify())
+# print(images.prettify())
+# print(image.prettify())
