@@ -5,6 +5,8 @@ from selenium import webdriver
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
+
 # Selenium
 # def get_html(url, wait):
 #     # fireFoxOptions = webdriver.FirefoxOptions()
@@ -89,6 +91,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Mars Hemispheres
 
+# Image 1
+
 def get_html_mh(url_mh, wait):
     driver = webdriver.Firefox()
     driver.get(url_mh)
@@ -97,16 +101,11 @@ def get_html_mh(url_mh, wait):
     driver.close()
     return html_mh
 
-url_mh = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+url_mh = "https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced"
 html_mh = get_html_mh(url_mh, wait = 1)
 soup_mh = BeautifulSoup(html_mh, "html.parser")
-print(soup_mh.prettify())
+# print(soup_mh.prettify())
 
-# images = soup_mh.find_all("div", class_ = "result-list")
-# images = soup_mh.find_all("div", class_ = "item")
-# image = images[0]
-# image = images.find("div", class_ = "item").find("img")["src"]
-
-# images = soup_mh.find("div", class_ = "item")
-# print(images.prettify())
+image = soup_mh.find("div", class_ = "downloads").find("a")["href"]
 # print(image.prettify())
+print(image)
