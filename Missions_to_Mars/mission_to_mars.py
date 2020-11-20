@@ -93,19 +93,89 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Image 1
 
-def get_html_mh(url_mh, wait):
+def get_html_mh1(url_mh1, wait):
     driver = webdriver.Firefox()
-    driver.get(url_mh)
+    driver.get(url_mh1)
     driver.implicitly_wait(wait)
-    html_mh = driver.page_source
+    html_mh1 = driver.page_source
     driver.close()
-    return html_mh
+    return html_mh1
 
-url_mh = "https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced"
-html_mh = get_html_mh(url_mh, wait = 1)
-soup_mh = BeautifulSoup(html_mh, "html.parser")
-# print(soup_mh.prettify())
+url_mh1 = "https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced"
+html_mh1 = get_html_mh1(url_mh1, wait = 1)
+soup_mh1 = BeautifulSoup(html_mh1, "html.parser")
+# print(soup_mh1.prettify())
 
-image = soup_mh.find("div", class_ = "downloads").find("a")["href"]
-# print(image.prettify())
-print(image)
+image_mh1 = soup_mh1.find("div", class_ = "downloads").find("a")["href"]
+# print(image_mh1)
+
+
+# Image 2
+
+def get_html_mh2(url_mh2, wait):
+    driver = webdriver.Firefox()
+    driver.get(url_mh2)
+    driver.implicitly_wait(wait)
+    html_mh2 = driver.page_source
+    driver.close()
+    return html_mh2
+
+url_mh2 = "https://astrogeology.usgs.gov/search/map/Mars/Viking/schiaparelli_enhanced"
+html_mh2 = get_html_mh2(url_mh2, wait = 1)
+soup_mh2 = BeautifulSoup(html_mh2, "html.parser")
+# print(soup_mh2.prettify())
+
+image_mh2 = soup_mh2.find("div", class_ = "downloads").find("a")["href"]
+# print(image_mh2)
+
+
+
+
+# Image 3
+
+def get_html_mh3(url_mh3, wait):
+    driver = webdriver.Firefox()
+    driver.get(url_mh3)
+    driver.implicitly_wait(wait)
+    html_mh3 = driver.page_source
+    driver.close()
+    return html_mh3
+
+url_mh3 = "https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced"
+html_mh3 = get_html_mh3(url_mh3, wait = 1)
+soup_mh3 = BeautifulSoup(html_mh3, "html.parser")
+# print(soup_mh3.prettify())
+
+image_mh3 = soup_mh3.find("div", class_ = "downloads").find("a")["href"]
+# print(image_mh3)
+
+
+
+# Image 4
+
+def get_html_mh4(url_mh4, wait):
+    driver = webdriver.Firefox()
+    driver.get(url_mh4)
+    driver.implicitly_wait(wait)
+    html_mh4 = driver.page_source
+    driver.close()
+    return html_mh4
+
+url_mh4 = "https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced"
+html_mh4 = get_html_mh4(url_mh4, wait = 1)
+soup_mh4 = BeautifulSoup(html_mh4, "html.parser")
+# print(soup_mh4.prettify())
+
+image_mh4 = soup_mh4.find("div", class_ = "downloads").find("a")["href"]
+print(image_mh4)
+
+
+
+# Image Dictionary
+
+hemisphere_image_urls = [
+    {"title": "Cerberus Hemisphere", "img_url": "image_mh1"},
+    {"title": "Schiaparelli Hemisphere", "img_url": "image_mh2"},
+    {"title": "Syrtis Major Hemisphere", "img_url": "image_mh3"},
+    {"title": "Valles Marineris Hemisphere", "img_url": "image_mh4"},
+]
