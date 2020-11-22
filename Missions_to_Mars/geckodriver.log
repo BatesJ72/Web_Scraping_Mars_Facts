@@ -2050,8 +2050,14 @@ Can't find symbol 'eglSwapBuffersWithDamageEXT'.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1606005219786	Marionette	INFO	Listening on port 59573
-1606005250332	geckodriver	INFO	Listening on 127.0.0.1:59634
-1606005253350	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\bates\\AppData\\Local\\Temp\\rust_mozprofilezyHrbC"
+1606009719147	Marionette	INFO	Stopped listening on port 59573
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+Temp\\rust_mozprofilezyHrbC"
 Can't find symbol 'eglSwapBuffersWithDamageEXT'.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -2260,9 +2266,14 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 ###!!! [Child][MessageChannel] Error: (msgtype=0x3800D3,name=PContent::Msg_ScriptErrorWithStack) Channel closing: too late to send/recv, messages will be lost
 
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-1:61543
-1606005888686	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\bates\\AppData\\Local\\Temp\\rust_mozprofilewx8BY0"
-Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+1606009720242	Marionette	INFO	Stopped listening on port 61354
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+wapBuffersWithDamageEXT'.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1606005900887	Marionette	INFO	Listening on port 61553

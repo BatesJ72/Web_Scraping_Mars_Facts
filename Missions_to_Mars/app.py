@@ -1,5 +1,5 @@
 from mission_to_mars_v2 import scrape
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import os
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -14,7 +14,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return "The app is up!"
+    return render_template("index.html")
+    
 
 @app.route("/scrape_data")
 def scrape_data():
