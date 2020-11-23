@@ -5756,9 +5756,14 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 ###!!! [Child][MessageChannel] Error: (msgtype=0x3800D3,name=PContent::Msg_ScriptErrorWithStack) Channel closing: too late to send/recv, messages will be lost
 
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
-1:64232
-1606101499812	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\bates\\AppData\\Local\\Temp\\rust_mozprofileGR4jPl"
-Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+1606103151966	Marionette	INFO	Stopped listening on port 64180
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+wapBuffersWithDamageEXT'.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1606101506722	Marionette	INFO	Listening on port 64240
