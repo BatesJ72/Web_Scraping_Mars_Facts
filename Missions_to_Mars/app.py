@@ -12,7 +12,13 @@ db = client.mars
 
 app = Flask(__name__)
 
+
 @app.route("/")
+def main():
+    mars_data = scrape()
+    return render_template("index.html", mars_data = mars_data)
+
+@app.route("/overlords")
 def main():
     mars_data = scrape()
     return render_template("index.html", mars_data = mars_data)
