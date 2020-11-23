@@ -6,7 +6,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 import pymongo
 
 
-CONN = os.getenv("MONGO_URI")
+CONN = os.getenv("CONN")
 client = pymongo.MongoClient(CONN)
 db = client.mars
 
@@ -14,12 +14,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template("index.html")
-    
+    mars_data = scrape()
+    return render_template("index.html", mars_data = mars_data)
+
 
 @app.route("/scrape_data")
 def scrape_data():
-    db.mars.insert_many(scrape())
+    db.mars.insert_many(mars_data())
     return "Successfully scraped Mars data"
 
 @app.route("/all")
@@ -29,10 +30,6 @@ def all_data():
         results.append({key: value for key, value in result.items() if not key == "_id"})
     return jsonify(results)
 
-
-# @app.route("/fact_table")
-# def fact_table():
-#     return mars_fact_table.html
 
 if __name__ == "__main__":
     app.run(debug = True)

@@ -47,6 +47,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # JPL Mars Space Images - Featured Image
 
+
 def get_html_jpl(url_jpl, wait):
     driver = webdriver.Firefox()
     driver.get(url_jpl)
@@ -57,12 +58,19 @@ def get_html_jpl(url_jpl, wait):
 
 url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
 html_jpl = get_html_jpl(url_jpl, wait = 5)
-soup_jpl = BeautifulSoup(html_jpl, "html.parser")
+soup_jpl = BeautifulSoup(html_jpl, "lxml")
 
-print(soup_jpl)
-# image = soup_jpl.find("div", class_ = "img").find("img")["src"]
-# print(image)
+# img_jpl = soup_jpl.find_all("a", id="full_image")[0]
+# img_jp2_v2 = img_jpl["data-link"].replace("/spaceimages/details.php?id=", "")
+# img_jpl_v3 = "https://www.jpl.nasa.gov/spaceimages/images/largesize/" + img_jp2_v2 + "_hires.jpg"
+# # print(img_jpl_v3)
 
+# img_jpl_final = [img_jpl_v3]
+
+img_jpl = soup_jpl.find('article')['style'].replace('background-image: url(', '').replace(');', '')[1:-1]
+img_jpl_final = "https://www.jpl.nasa.gov/" + img_jpl
+
+print(img_jpl_final)
 
 
 

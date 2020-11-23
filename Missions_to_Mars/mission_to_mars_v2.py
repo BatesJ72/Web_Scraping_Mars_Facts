@@ -2,8 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
+import os
+import pymongo
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
+
+
+CONN = os.getenv("CONN")
+client = pymongo.MongoClient(CONN)
+db = client.mars
+
 
 
 def scrape():
@@ -31,38 +39,22 @@ def scrape():
     # print(news_p)
 
 
-
     # JPL Mars Space Images - Featured Image
 
-    # def get_html_jpl(url_jpl, wait):
-    #     driver = webdriver.Firefox()
-    #     driver.get(url_jpl)
-    #     driver.implicitly_wait(wait)
-    #     html_jpl = driver.page_source
-    #     driver.close()
-    #     return html_jpl
+    def get_html_jpl(url_jpl, wait):
+        driver = webdriver.Firefox()
+        driver.get(url_jpl)
+        driver.implicitly_wait(wait)
+        html_jpl = driver.page_source
+        driver.close()
+        return html_jpl
 
-    # url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-    # html_jpl = get_html_jpl(url_jpl, wait = 1)
-    # soup_jpl = BeautifulSoup(html_jpl, "html.parser")
+    url_jpl = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
+    html_jpl = get_html_jpl(url_jpl, wait = 5)
+    soup_jpl = BeautifulSoup(html_jpl, "lxml")
 
-    # image_jpl = soup_jpl.find("div", class_ = "img").find("img")["src"]
-    # image_jpl = soup_jpl.find("div", class_ = "carousel_items").find("style")["url"]
-    # image_jpl = soup_jpl.find("article", class_ = "carousel_item").find("style")["url"]
-
-    # image_jpl = ("https://www.jpl.nasa.gov" + image_jpl)
-    # print(image_jpl)
-
-    # <div class="fancybox-inner fancybox-skin fancybox-dark-skin fancybox-dark-skin-open" style="border-width: 10px; margin-top: -10px; margin-left: -10px; overflow: visible; width: 474px; height: 474px;"><img src="/spaceimages/images/mediumsize/PIA17838_ip.jpg" class="fancybox-image" style="display: inline;"><a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a><a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a><a title="Display actual size" class="fancybox-expand" href="javascript:;"></a></div>
-
-    # <article alt="Untangling the Remains of Cassiopeia A" 
-    # class="carousel_item" 
-    # style="background-image: url('/spaceimages/images/wallpaper/PIA17838-1920x1200.jpg');">
-
-
-    # with open('jpl.html', 'w+', encoding = 'utf-8') as f:
-    #     f.write(str(soup_jpl.prettify()))
-
+    img_jpl = soup_jpl.find('article')['style'].replace('background-image: url(', '').replace(');', '')[1:-1]
+    img_jpl_final = "https://www.jpl.nasa.gov/" + img_jpl
 
 
     # Mars Facts
@@ -80,10 +72,6 @@ def scrape():
     soup_mf = BeautifulSoup(html_mf, "html.parser")
 
     table_mf = soup_mf.find("table", class_ = "tablepress tablepress-id-p-mars")
-
-    with open('mars_facts_table.html', 'w+', encoding = 'utf-8') as f:
-        f.write(str(table_mf.prettify()))
-
 
 
     # Mars Hemispheres
@@ -164,13 +152,16 @@ def scrape():
     # print(hemisphere_image_urls)
 
     # Create Dictionary for All Data
-    scrape = [
-        {"title": "News Title", "url": news_title},
-        {"title": "News Paragraph", "url": news_p},
-        {"title": "Cerberus Hemisphere", "url": image_mh1},
-        {"title": "Schiaparelli Hemisphere", "url": image_mh2},
-        {"title": "Syrtis Major Hemisphere", "url": image_mh3},
-        {"title": "Valles Marineris Hemisphere", "url": image_mh4},
-    ]
-
-    return scrape
+    mars_data = {}
+    
+    mars_data.update({"title1": "news_title", "url1": news_title})
+    mars_data.update({"title2": "news_paragraph", "url2": news_p})
+    mars_data.update({"title3": "Cerberus Hemisphere", "url3": image_mh1})
+    mars_data.update({"title4": "Schiaparelli Hemisphere", "url4": image_mh2})
+    mars_data.update({"title5": "Syrtis Major Hemisphere", "url5": image_mh3})
+    mars_data.update({"title6": "Valles Marineris Hemisphere", "url6": image_mh4})
+    mars_data.update({"title7": "mars_fact_table", "url7": table_mf})
+    mars_data.update({"title8": "background_image", "url8": img_jpl_final})
+    
+    
+    return mars_data

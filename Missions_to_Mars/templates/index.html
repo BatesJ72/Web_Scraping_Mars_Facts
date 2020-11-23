@@ -4,15 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars Facts</title>
-</head>
 
-<body>
     <link rel = "stylesheet" type = "text/css" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<h1>The app is up!</h1>        
-<p>Let's find some Mars facts</p>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
+
+    <style>
+    .img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    .box_left_lg {
+        float: left;
+        height: 50%;
+        width: 50%;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        background-color: rgb(155, 143, 143);
+    }
+
+    .box_right {
+        float: right;
+        height: 40%;
+        width: 40%;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        background-color: rgb(155, 143, 143);
+    }
+
+    .box_left {
+        float: left;
+        height: 40%;
+        width: 40%;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        background-color: rgb(155, 143, 143);
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .border {
+        border-style: solid;
+        margin-top: 30px;
+    }
+    </style>
+
+</head>
+
+<body style="background-color:rgb(224, 104, 83)">
+
+<h1 class = "center"><b>Our New Overlords Have Arrived!</b></h1>        
+<h2 class = "center">As you know, Mars recently invaded Earth. We're <b>SO HAPPY</b> with our Martian Overlords!</h2>
+<h2 class = "center">Let's learn some more about our new overlords and the planet they come from!</h2>
+<br>
+
+<!-- Mars News  -->
+<div class="container">
+    <div class=row>
+        <div class="col-lg-12 col-sm-12">
+            <h3>Latest Mars News</h3>
+            <br>
+            <h5>{{ mars_data.url1 }}</h5>
+            <p>{{ mars_data.url2 }}</p>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- Background Image  -->
+<div class="container">
+    <div class=row>
+        <div class="col-lg-8 col-sm-12">
+            <h3>Check out this neat-o image!</h3>
+                <a href={{ mars_data.url8 }}> 
+                    <img alt="Mars Featured Image" src={{ mars_data.url8 }} class="img">
+                </a>
+        <!-- </div> -->
+    </div>
+
+    <!-- Mars Fact Table -->
+    <!-- <div class=row> -->
+        <div class="col-lg-4 col-sm-12 border">
+            <h3>Mars Fact Table</h3>
+            {{ mars_data.url7  | safe }}
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- Mars Images -->
+<div class="container">
+    <h3>Images of Mars Hemispheres</h3>
+    <div class=row>
+        <div class="col-lg-6 col-sm-12 box_left">
+            <h4>Cerberus Hemisphere</h4>
+            <a href = {{ mars_data.url3 }}>
+                <img alt="Cerberus Hemisphere" src={{ mars_data.url3 }} class="img">
+                </a>
+        </div>
+        <div class="col-lg-6 col-sm-12 box_right">
+            <h4>Schiaparelli Hemisphere</h4>
+            <a href = {{ mars_data.url4 }}>
+                <img alt="Schiaparelli Hemisphere" src={{ mars_data.url4 }} class="img">
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class=row>
+        <div class="col-lg-6 col-sm-12 box_left">
+            <h4>Syrtis Major Hemisphere</h4>
+            <a href = {{ mars_data.url5 }}>
+                <img alt="Syrtis Major Hemisphere" src= {{ mars_data.url5 }} class="img">
+            </a>
+        </div>
+        <div class="col-lg-6 col-sm-12 box_right">
+            <h4>Valles Marineris Hemisphere</h4>
+            <a href = {{ mars_data.url6 }}>
+                <img alt="Valles Marineris Hemisphere" src={{ mars_data.url6 }} class="img">
+            </a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 
