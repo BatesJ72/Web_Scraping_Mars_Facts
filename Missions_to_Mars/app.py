@@ -19,10 +19,9 @@ def main():
     return render_template("index.html", mars_data = mars_data)
 
 @app.route("/overlords")
-def main():
+def overlords():
     mars_data = scrape()
     return render_template("index.html", mars_data = mars_data)
-
 
 @app.route("/scrape_data")
 def scrape_data():
